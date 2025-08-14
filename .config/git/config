@@ -1,0 +1,16 @@
+[user]
+	name = tello
+	email = tello@072004.xyz
+	signingKey = /home/tello/.ssh/keys/tello@072004.xyz.pub
+[gpg]
+	format = ssh
+[commit]
+	gpgSign = true
+[tag]
+	gpgSign = true
+[init]
+	defaultBranch = main
+[gpg "ssh"]
+	allowedSignersFile = /home/tello/.ssh/allowed_signers
+[alias]
+	amend = commit --amend --no-edit

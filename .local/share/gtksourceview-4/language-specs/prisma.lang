@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="prisma" name="Prisma" version="2.0" _section="Source">
+  <metadata>
+    <property name="mimetypes">text/x-prisma</property>
+    <property name="globs">*.prisma</property>
+  </metadata>
+
+  <styles>
+    <style id="keyword" name="Keyword" map-to="def:keyword"/>
+    <style id="type" name="Type" map-to="def:type"/>
+    <style id="string" name="String" map-to="def:string"/>
+    <style id="comment" name="Comment" map-to="def:comment"/>
+    <style id="constant" name="Constant" map-to="def:constant"/>
+    <style id="annotation" name="Annotation" map-to="def:preprocessor"/>
+  </styles>
+
+  <definitions>
+    <context id="prisma">
+      <include>
+
+        <context id="comment" style-ref="comment">
+          <start>//</start>
+          <end>$</end>
+        </context>
+
+        <context id="string" style-ref="string">
+          <start>"</start>
+          <end>"</end>
+        </context>
+
+        <context id="keywords" style-ref="keyword">
+          <keyword>generator</keyword>
+          <keyword>datasource</keyword>
+          <keyword>model</keyword>
+          <keyword>enum</keyword>
+        </context>
+
+        <context id="types" style-ref="type">
+          <keyword>String</keyword>
+          <keyword>Int</keyword>
+          <keyword>Float</keyword>
+          <keyword>Boolean</keyword>
+          <keyword>DateTime</keyword>
+          <keyword>Json</keyword>
+          <keyword>Bytes</keyword>
+          <keyword>Decimal</keyword>
+          <keyword>BigInt</keyword>
+        </context>
+
+        <context id="constants" style-ref="constant">
+          <keyword>true</keyword>
+          <keyword>false</keyword>
+          <keyword>null</keyword>
+          <keyword>now</keyword>
+          <keyword>uuid</keyword>
+          <keyword>env</keyword>
+          <keyword>map</keyword>
+        </context>
+
+        <context id="annotations" style-ref="annotation">
+          <prefix>@</prefix>
+          <keyword>id</keyword>
+          <keyword>default</keyword>
+          <keyword>relation</keyword>
+          <keyword>unique</keyword>
+          <keyword>updatedAt</keyword>
+          <keyword>map</keyword>
+          <keyword>ignore</keyword>
+        </context>
+
+      </include>
+    </context>
+  </definitions>
+</language>

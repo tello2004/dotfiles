@@ -1,0 +1,1 @@
+set -e SSH_AUTH_SOCK

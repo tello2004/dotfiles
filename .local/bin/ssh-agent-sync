@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+cd ~/.ssh/keys
+ssh-add -L | gawk '{print $1 " " $2 " " $3 > $3 ".pub"}'
+chmod 644 *.pub

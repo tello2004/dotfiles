@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+ This file is part of GtkSourceView
+
+ Author: Phil Hagelberg <phil@hagelb.org>
+ Copyright (C) 2023 Phil Hagelberg
+
+ GtkSourceView is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+
+ GtkSourceView is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public License
+ along with this library; if not, see <http://www.gnu.org/licenses/>.
+
+ The keyword list is current as of Fennel 1.3.1.
+-->
+<language id="fennel" name="Fennel" version="2.0" _section="Source">
+  <metadata>
+    <property name="mimetypes">text/x-fennel</property>
+    <property name="globs">*.fnl</property>
+    <property name="line-comment-start">;</property>
+  </metadata>
+
+  <styles>
+    <style id="comment" name="Comment" map-to="def:comment"/>
+    <style id="boolean" name="Boolean" map-to="def:boolean"/>
+    <style id="string" name="String" map-to="def:string"/>
+    <style id="keyword" name="Keyword" map-to="def:keyword"/>
+    <style id="function" name="Function" map-to="def:function"/>
+  </styles>
+
+  <keyword-char-class>([^()\[\]{}';"@`,#\s])</keyword-char-class>
+
+  <definitions>
+    <context id="line-comment" style-ref="comment"
+             end-at-line-end="true" class="comment" >
+      <start>;</start>
+      <include><context ref="def:in-comment"/></include>
+    </context>
+
+    <context id="string" style-ref="string" class="string"
+             class-disabled="no-spell-check">
+      <start>"</start>
+      <end>"</end>
+      <include><context ref="def:escape"/></include>
+    </context>
+
+    <context id="keystring" style-ref="string">
+      <match>\%[:[^ '~`;@\(\)\[\]\{\}]+</match>
+    </context>
+
+    <context id="keyword" style-ref="keyword">
+      <!-- this list omits most of the keywords that have punctuation
+           names; (:, =, ->, etc) as they're not that important to
+           highlight, plus the XML wouldn't accept them anyway. -->
+      <keyword>accumulate</keyword>
+      <keyword>and</keyword>
+      <keyword>assert-repl</keyword>
+      <keyword>band</keyword>
+      <keyword>bnot</keyword>
+      <keyword>bor</keyword>
+      <keyword>bxor</keyword>
+      <keyword>case</keyword>
+      <keyword>case-try</keyword>
+      <keyword>collect</keyword>
+      <keyword>comment</keyword>
+      <keyword>do</keyword>
+      <keyword>doto</keyword>
+      <keyword>each</keyword>
+      <keyword>eval-compiler</keyword>
+      <keyword>faccumulate</keyword>
+      <keyword>fcollect</keyword>
+      <keyword>fn</keyword>
+      <keyword>for</keyword>
+      <keyword>global</keyword>
+      <keyword>hashfn</keyword>
+      <keyword>icollect</keyword>
+      <keyword>if</keyword>
+      <keyword>import-macros</keyword>
+      <keyword>include</keyword>
+      <keyword>lambda</keyword>
+      <keyword>length</keyword>
+      <keyword>let</keyword>
+      <keyword>local</keyword>
+      <keyword>lshift</keyword>
+      <keyword>lua</keyword>
+      <keyword>macro</keyword>
+      <keyword>macrodebug</keyword>
+      <keyword>macros</keyword>
+      <keyword>match</keyword>
+      <keyword>match-try</keyword>
+      <keyword>not</keyword>
+      <keyword>not=</keyword>
+      <keyword>or</keyword>
+      <keyword>partial</keyword>
+      <keyword>pick-args</keyword>
+      <keyword>pick-values</keyword>
+      <keyword>quote</keyword>
+      <keyword>require-macros</keyword>
+      <keyword>rshift</keyword>
+      <keyword>set</keyword>
+      <keyword>set-forcibly!</keyword>
+      <keyword>tail!</keyword>
+      <keyword>tset</keyword>
+      <keyword>unquote</keyword>
+      <keyword>values</keyword>
+      <keyword>var</keyword>
+      <keyword>when</keyword>
+      <keyword>while</keyword>
+      <keyword>with-open</keyword>
+      <keyword>λ</keyword>
+    </context>
+
+    <context id="function" style-ref="function">
+      <keyword>assert</keyword>
+      <keyword>collectgarbage</keyword>
+      <keyword>dofile</keyword>
+      <keyword>error</keyword>
+      <keyword>getmetatable</keyword>
+      <keyword>ipairs</keyword>
+      <keyword>load</keyword>
+      <keyword>loadfile</keyword>
+      <keyword>loadstring</keyword>
+      <keyword>module</keyword>
+      <keyword>next</keyword>
+      <keyword>pairs</keyword>
+      <keyword>pcall</keyword>
+      <keyword>print</keyword>
+      <keyword>rawequal</keyword>
+      <keyword>rawget</keyword>
+      <keyword>rawlen</keyword>
+      <keyword>rawset</keyword>
+      <keyword>require</keyword>
+      <keyword>select</keyword>
+      <keyword>setmetatable</keyword>
+      <keyword>tonumber</keyword>
+      <keyword>tostring</keyword>
+      <keyword>type</keyword>
+      <keyword>unpack</keyword>
+      <keyword>xpcall</keyword>
+    </context>
+
+    <context id="boolean" style-ref="boolean">
+      <keyword>true</keyword>
+      <keyword>false</keyword>
+      <keyword>nil</keyword>
+    </context>
+
+    <context id="fennel" class="no-spell-check">
+      <include>
+        <context ref="string"/>
+        <context ref="keystring"/>
+        <context ref="keyword"/>
+        <context ref="function"/>
+        <context ref="line-comment"/>
+        <context ref="boolean"/>
+      </include>
+    </context>
+  </definitions>
+</language>

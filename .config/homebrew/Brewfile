@@ -1,0 +1,35 @@
+# vi: ft=ruby
+
+# tools
+
+brew "fish"
+brew "direnv"
+brew "fd"
+brew "ripgrep"
+brew "tup"
+brew "make"
+brew "cmake"
+brew "gawk"
+
+# sdk, toolchain, etc.
+
+brew "gcc"
+brew "zig"
+brew "rust"
+brew "sqlite"
+brew "fennel"
+brew "racket"
+brew "sbcl"
+brew "openjdk"
+brew "lua"
+brew "go"
+brew "python"
+brew "ruby"
+brew "php"
+brew "composer"
+brew "node"
+brew "maven"
+brew "gradle"
+brew "luarocks"
+brew "poetry"
+brew "pipx"
