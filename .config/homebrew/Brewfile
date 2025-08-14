@@ -2,6 +2,9 @@
 
 # tools
 
+brew "git"
+brew "jj"
+brew "fossil"
 brew "fish"
 brew "direnv"
 brew "fd"
