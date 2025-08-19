@@ -14,3 +14,9 @@ export XDG_STATE_HOME="$HOME"/.local/state
 
 # for Wine applications
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
+
+if [[ $- == *i* ]]; then
+  if [[ "$(cat /proc/$PPID/comm)" == *"io.elementary.c"* ]]; then
+    exec /home/linuxbrew/.linuxbrew/bin/fish
+  fi
+fi
