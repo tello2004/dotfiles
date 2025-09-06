@@ -4,9 +4,11 @@ SETUVAR --export BUNDLE_USER_CACHE:/home/tello/\x2ecache/bundle
 SETUVAR --export BUNDLE_USER_CONFIG:/home/tello/\x2econfig/bundle/config
 SETUVAR --export BUNDLE_USER_PLUGIN:/home/tello/\x2elocal/share/bundle
 SETUVAR --export CARGO_HOME:/home/tello/\x2elocal/share/cargo
+SETUVAR --export COMPOSER_HOME:/home/tello/\x2elocal/share/composer
 SETUVAR --export GOMODCACHE:/home/tello/\x2ecache/go/mod
 SETUVAR --export --path GOPATH:/home/tello/\x2elocal/share/go
 SETUVAR --export GRADLE_USER_HOME:/home/tello/\x2elocal/share/gradle
+SETUVAR --export HOMEBREW_NO_ENV_HINTS:1
 SETUVAR --export MAVEN_ARGS:\x2d\x2dsettings\x20/home/tello/\x2econfig/maven/settings\x2exml
 SETUVAR --export MAVEN_OPTS:\x2dDmaven\x2erepo\x2elocal\x3d/home/tello/\x2elocal/share/maven/repository
 SETUVAR --export NODE_REPL_HISTORY:/home/tello/\x2elocal/share/node_repl_history
@@ -18,7 +20,7 @@ SETUVAR --export PYTHONUSERBASE:/home/tello/\x2elocal/share/python
 SETUVAR --export PYTHON_HISTORY:/home/tello/\x2elocal/state/python_history
 SETUVAR --export RLWRAP_HOME:/home/tello/\x2elocal/share/rlwrap
 SETUVAR --export SQLITE_HISTORY:/home/tello/\x2elocal/state/sqlite_history
-SETUVAR --export SSH_AUTH_SOCK:/home/tello/\x2ebitwarden\x2dssh\x2dagent\x2esock
+SETUVAR --export SSH_AUTH_SOCK:/run/user/1000/app/com\x2ebitwarden\x2edesktop/ssh\x2esock
 SETUVAR __fish_initialized:3800
 SETUVAR fish_color_autosuggestion:brblack
 SETUVAR fish_color_cancel:\x2dr
@@ -48,3 +50,4 @@ SETUVAR fish_pager_color_description:yellow\x1e\x2di
 SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
+SETUVAR fish_user_paths:/home/tello/\x2elocal/share/composer/vendor/bin
