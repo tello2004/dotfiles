@@ -1,5 +1,5 @@
 [user]
-	name = tello
+	name = Martín Aguilar
 	email = tello@072004.xyz
 	signingKey = /home/tello/.ssh/keys/tello@072004.xyz.pub
 [gpg]
