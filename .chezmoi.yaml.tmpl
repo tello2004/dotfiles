@@ -1,0 +1,7 @@
+interpreters:
+  sh:
+    command: /usr/bin/host-spawn
+hooks:
+  read-source-state:
+    pre:
+      command: {{.chezmoi.sourceDir}}/.bootstrap.sh

@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+[ -f /etc/bashrc ] && source /etc/bashrc
+
+: "${XDG_CONFIG_HOME:="${HOME}/.config"}"
+if [ -d "$XDG_CONFIG_HOME/bashrc.d" ]; then
+    for rc in "${XDG_CONFIG_HOME}/bashrc.d"/*; do
+        [ -f "$rc" ] && source "$rc"
+    done
+fi
+unset rc
+
+PROMPT_DIRTRIM=2
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }history -a"
+
+HISTSIZE=500000
+HISTFILESIZE=100000
+HISTCONTROL="erasedups:ignoreboth"
+HISTTIMEFORMAT='%F %T '
+HISTIGNORE="&:' '*:exit:ls:bg:fg:history:clear"
+HISTFILE=$XDG_STATE_HOME/bash_history
+INPUTRC=$XDG_CONFIG_HOME/inputrc
+
+shopt -s checkwinsize 2>/dev/null
+shopt -s globstart    2>/dev/null
+shopt -s histappend   2>/dev/null
+shopt -s cmdhist      2>/dev/null
+shopt -s autocd       2>/dev/null
+shopt -s dirspell     2>/dev/null
+shopt -s cdspell      2>/dev/null
+
+set -o noclobber

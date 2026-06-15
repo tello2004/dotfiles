@@ -1,0 +1,48 @@
+[user]
+name=Martín Aguilar Tello
+email=tello@072004.xyz
+signingkey=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP+kw6EP/vcu/Hq5MoIyPtHxGaRWxdCcXmADDfqZT4ym
+[gpg]
+format=ssh
+[commit]
+gpgsign=true
+verbose=true
+[tag]
+gpgsign=true
+[gpg "ssh"]
+allowedSignersFile=~/.ssh/allowed_signers
+[format]
+signoff=true
+[column]
+ui=auto
+[init]
+defaultBranch=main
+[diff]
+algorithm=histogram
+colorMoved=plain
+renames=true
+mnemonicPrefix=true
+[push]
+default=simple
+autoSetupRemote=true
+followTags=true
+[fetch]
+prune=true
+pruneTags=true
+all=true
+[rerere]
+enabled=true
+autoupdate=true
+[rebase]
+autoSquash=true
+autoStash=true
+updateRefs=true
+[core]
+fsmonitor=true
+untrackedCache=true
+	editor = flatpak run re.sonny.Commit
+
+[re.sonny.Commit]
+title-length-hint=50
+body-length-wrap=72
+auto-capitalize-title=true

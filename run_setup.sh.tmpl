@@ -1,0 +1,78 @@
+[ -f ~/.local/state/.initialized ] && exit 0
+
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+{{range .system.applications -}}
+if ! flatpak info {{.id | quote}} &>/dev/null; then
+    echo "* Installing application {{.id}}..." && flatpak install {{.repo}} {{.id}}
+fi
+{{end -}}
+
+if [ ! -f /etc/systemd/resolved.conf ]; then
+    echo "* Setting up systemd-resolved..."
+    sudo tee /etc/systemd/resolved.conf <<< "[Resolve]
+DNSOverTLS=opportunistic"
+fi
+
+if [ ! -f /etc/modules-load.d/bbr.conf ]; then
+    echo "* Setting up BBR..."
+    echo "tcp_bbr" | sudo tee /etc/modules-load.d/bbr.conf
+    sudo tee -a /etc/sysctl.d/99-sysctl.conf <<< "net.core.default_qdisc=fq
+net.ipv4.tcp_congestion_control=bbr"
+fi
+
+if [[ ! `cat /proc/sys/kernel/yama/ptrace_scope` == "1" ]]; then
+    echo "* Setting up ptrace..."
+    sudo cp /usr/lib/sysctl.d/10-default-yama-scope.conf /etc/sysctl.d/
+    sudo sed -i 's/_scope=0/_scope=1/g' /etc/sysctl.d/10-default-yama-scope.conf
+fi
+
+if [ ! -f /etc/systemd/zram-generator.conf ]; then
+    echo "* Setting up systemd-zram-generator..."
+
+    sudo tee -a /etc/systemd/zram-generator.conf <<< "[zram0]
+zram-size = ram * 1.5
+compression-algorithm = zstd
+swap-priority = 100"
+
+    sudo tee -a /etc/sysctl.d/99-sysctl.conf <<< "vm.page-cluster=0
+vm.swappiness=180
+vm.watermark_boost_factor=0
+vm.watermark_scale_factor=125"
+fi
+
+if [ ! -d /var/lib/extensions ]; then
+    echo "* Setting up systemd-sysext..."
+    sudo install -d -m 0755 -o 0 -g 0 "/var/lib/extensions" "/var/lib/extensions.d"
+    sudo restorecon -RFv "/var/lib/extensions" "/var/lib/extensions.d"
+    sudo systemctl enable --now systemd-sysext.service
+fi
+
+function install_sysext(){
+    URL="${1}"
+    SYSEXT="${2}"
+
+    echo "* Installing sysext ${SYSEXT} from ${URL}..."
+    sudo install -d -m 0755 -o 0 -g 0 "/etc/sysupdate.${SYSEXT}.d"
+    sudo restorecon -RFv "/etc/sysupdate.${SYSEXT}.d"
+    curl --silent --fail --location "${URL}/${SYSEXT}.conf"\
+     | sudo tee "/etc/sysupdate.${SYSEXT}.d/${SYSEXT}.conf"
+    sudo /usr/lib/systemd/systemd-sysupdate update --component "${SYSEXT}"
+}
+
+# install sysexts
+{{range .system.extensions -}}
+[ ! -d /etc/sysupdate.{{.name}}.d ] && install_sysext {{.url | quote}} {{.name}}
+{{end -}}
+
+# enable disk compression
+if [[ ! "$(rpm-ostree kargs)" == *"compress=zstd:1"* ]]; then
+    echo "* Setting up disk compression..."
+    sudo rpm-ostree kargs --append="rootflags=subvol=root,compress=zstd:1"
+    sudo btrfs filesystem defragment -r -v -f -czstd /var
+fi
+
+echo "Setup finished. A reboot is expected to apply configuration."
+
+mkdir -p ~/.local/state
+touch ~/.local/state/.initialized

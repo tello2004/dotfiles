@@ -1,0 +1,15 @@
+gnome:
+  extensions:
+    - tailscale-gnome-qs@tailscale-qs.github.io
+
+system:
+  applications:
+    - repo: flathub
+      id: re.sonny.Commit
+    - repo: flathub
+      id: dev.zed.Zed
+    - repo: fedora
+      id: com.github.tchx84.Flatseal
+  extensions:
+    - url: https://extensions.fcos.fr/community
+      name: tailscale

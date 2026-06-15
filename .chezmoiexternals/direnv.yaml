@@ -1,0 +1,4 @@
+.local/bin/direnv:
+  type: file
+  url: {{ gitHubLatestReleaseAssetURL "direnv/direnv" (printf "direnv.%s-%s" .chezmoi.os .chezmoi.arch) }}
+  executable: true
