@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
-alias chezmoi="toolbox run chezmoi"
-eval "$(chezmoi completion bash)"
+if [ ! -f /run/.toolboxenv ]; then
+    alias chezmoi="toolbox run chezmoi"
+    eval "$(chezmoi completion bash)"
+fi
