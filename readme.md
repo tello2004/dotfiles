@@ -6,7 +6,7 @@ opinionated configuration files, probably not for you. exclusively made for Fedo
 
 ```bash
 toolbox create && toolbox run sudo dnf install chezmoi
-toolbox chezmoi init --apply tello2004
+toolbox run chezmoi init --apply tello2004
 systemctl reboot # to load up needed environment variables
 ```
 
