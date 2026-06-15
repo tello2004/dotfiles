@@ -1,8 +1,6 @@
 # Martín's $HOME
 
-opinionated configuration files, probably not for you.
-
-the only hard requirement is having Fedora Silverblue since all settings are built around [toolbx](https://github.com/containers/toolbox).
+opinionated configuration files, probably not for you. exclusively made for Fedora Silverblue.
 
 ## installation
 
