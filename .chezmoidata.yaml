@@ -6,8 +6,6 @@ system:
   applications:
     - repo: flathub
       id: re.sonny.Commit
-    - repo: flathub
-      id: dev.zed.Zed
     - repo: fedora
       id: com.github.tchx84.Flatseal
   extensions:
